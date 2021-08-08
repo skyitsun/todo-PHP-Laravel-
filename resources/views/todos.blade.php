@@ -15,6 +15,13 @@
     font-size : 20px;
 }
 
+.statBtn {
+    border : 0px;
+    background-color : #ffffff;
+    cursor: pointer;
+    margin : auto;
+}
+
 tr {
     border : 1px solid #333;
     /* background-color : #FDF5E6; */
@@ -30,7 +37,10 @@ table {
 <body>
     <h1 style="font-size:50px; text-align : center;">Todo List</h1>
     <div style="text-align : center;">
-        <input type="text"> <button>등록</button>
+        <select id="refer">
+
+        </select>
+        <input type="text" id="tdIns"> <button onclick="insertTodoList();">등록</button>
     </div>
     <div style="margin : 20px;"></div>
     <table>
@@ -62,7 +72,6 @@ table {
         showTodoList();
     });
 
-
     function showTodoList() {
         $.ajax({
             url : "http://localhost:8000/api/todos",
@@ -71,22 +80,53 @@ table {
                 //  console.log(s); // 데이터 전달여부 확인 콘솔
                  var data = JSON.parse(s); // 데이터 JSON 파싱
                  var todoList = data['data']; // 전달된 데이터에서 todoList 가져오기
-                 var html = "";
+                 var html = ""; // table 의 tr 추가용
+                 var opt = ""; // select->option 추가용
+                 var stat = "";
                  for($i=0; $i < todoList.length; $i++) {
                     // console.log(todoList[$i]); // todoList 가져온게 맞는지 확인하는 콘솔
                     // var beTime = new Date(todoList[$i]['updated_at']);
                     // var time = timeConvert(beTime);
                     // console.log(time);
                     html += "<tr>";
-                    html += "<td><input type='checkbox' id='check_'"+todoList[$i]['id']+"></td>";
-                    html += "<td><p>"+todoList[$i]['title']+"</p></td>";
+                    html += "<td><input type='checkbox' id='check_"+todoList[$i]['id']+"'></td>";
+                    if(!todoList[$i]['reference']) {
+                        html += "<td><p>"+todoList[$i]['title']+"</p></td>";
+                    } else {
+                        html += "<td><p>"+todoList[$i]['title']+" 참조 : "+todoList[$i]['reference']+"</p></td>";
+                    }
+                    if(!todoList[$i]['status']) {
+                        stat = "<td><button class='statBtn' style='color:red;'>미완료</button></td>";
+                    } else {
+                        stat = "<td><button class='statBtn'>완료</button></td>";
+                    }
                     html += "<td> 수정일 : "+timeConvert(new Date(todoList[$i]['updated_at']))+"</td>";
                     html += "<td> 작성일 : "+timeConvert(new Date(todoList[$i]['created_at']))+"</td>";
+                    html += stat;
                     html += "<td><div style='text-align:center;'><button type='button' class='delBtn'> X </button></div></td>";
                     html += "</tr>";
+
+                    opt += "<option value='"+todoList[$i]['id']+"'>"+todoList[$i]['title']+"</option>";
                  }
 
                  $("#tbody").html(html);
+                 $("#refer").html(opt);
+            },
+            error : function (e) {
+                conosle.log(e);
+            }
+        });
+    }
+
+    function insertTodoList() {
+        var todoInsert = $("#tdIns").val();
+        $.ajax({
+            url : "http://localhost:8000/api/todos",
+            type : "POST",
+            data : {"title" : todoInsert},
+            success : function (s) {
+                console.log("성공?");
+                location.reload();
             },
             error : function (e) {
                 conosle.log(e);

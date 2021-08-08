@@ -16,10 +16,13 @@ class TodoController extends Controller
     public function index()
     {
         // $todos = DB::tables('todos')->paginate(5);
-
         $todoList = Todo::all();
 
-        return $todoList;
+        $data = array();
+        $data['result'] = "S000";
+        $data['data'] = $todoList;
+        echo json_encode($data,JSON_UNESCAPED_UNICODE);
+        return;
     }
 
     /**
@@ -45,7 +48,15 @@ class TodoController extends Controller
         $request->validate([ // 꼭 전달되어야 하는 param 검사
             'title' => 'required'
         ]);
-        return Todo::create($request->all());
+
+        $todoList = Todo::create($request->all());
+
+        $data = array();
+        $data['result'] = "S000";
+        $data['data'] = $todoList;
+
+        echo json_encode($data,JSON_UNESCAPED_UNICODE);
+        return ;
     }
 
     /**

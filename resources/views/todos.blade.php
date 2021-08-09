@@ -158,8 +158,15 @@ table {
                     // opt += "<option value='"+todoList[$i]['id']+"'>"+todoList[$i]['title']+"</option>";
                 }
 
-
-                if(currentPage < perPage) {
+                if(lastPage < perPage) {
+                    for(var i=0; i<lastPage; i++) {
+                        if(i+1 == currentPage) {
+                            page += "<button style='font-weight:bold;' onclick='showTodoList("+(i+1)+")'>"+(i+1)+"</button>";
+                        } else {
+                            page += "<button onclick='showTodoList("+(i+1)+")'>"+(i+1)+"</button>";
+                        }
+                    }
+                } else if(currentPage < perPage) {
                     for(var i=0; i < perPage; i++) {
                         console.log(perPage-i);
                         if(i+1 == currentPage) {

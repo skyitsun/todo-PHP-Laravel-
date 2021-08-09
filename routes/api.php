@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('todos/search', [TodoController::class, 'search']);
 Route::resource('/todos', TodoController::class);
 
 // Route::get('/todos', [TodoController::class, 'index']);

@@ -90,7 +90,7 @@ table {
             <option value="4">등록일</option>
             <option value="5">상태</option>
         </select>
-        <input type="text" id="searchStr" value=""> <button id="searBtn" onclick="serchTodoList();" value="0">검색</button>
+        <input type="text" id="searchStr" value="" placeholder="날짜는 YYYY-MM-DD 형식으로 입력해주세요"> <button id="searBtn" onclick="serchTodoList();" value="0">검색</button>
     </div>
 
     <div id="page" style="text-align:center;">
@@ -309,8 +309,9 @@ table {
             type : "DELETE",
             success : function (s) {
                 // var data = JSON.parse(s);
-                var data = s['data'];
-                var result = data['result'];
+                console.log(s);
+                // var data = s['data'];
+                var result = s['result'];
                 if(result == 'S000') {
                     alert('TodoList가 정상적으로 삭제되었습니다.');
                     location.reload();
@@ -347,8 +348,8 @@ table {
             success : function (s) {
                 // console.log(s);
                 // var data = JSON.parse(s);
-                var data = s['data'];
-                if(data['result'] == 'S000') {
+                // var data = s['data'];
+                if(s['result'] == 'S000') {
                     console.log(s);
                     location.reload();
                 } else {

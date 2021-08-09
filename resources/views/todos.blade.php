@@ -126,10 +126,10 @@ table {
                 var lastPage = s['data']['last_page'];
                 var currentPage = s['data']['current_page'];
                 var pageList = s['data']['links']; // page 처리를 위한 변수
-                console.log(perPage);
-                console.log(pageList);
-                console.log("currentPage : " + currentPage);
-                console.log("lastPage : " + lastPage);
+                // console.log(perPage);
+                // console.log(pageList);
+                // console.log("currentPage : " + currentPage);
+                // console.log("lastPage : " + lastPage);
                 for(var i=0; i < todoList.length; i++) {
                     // console.log(todoList[$i]); // todoList 가져온게 맞는지 확인하는 콘솔
                     // var beTime = new Date(todoList[$i]['updated_at']);
@@ -168,7 +168,7 @@ table {
                     }
                 } else if(currentPage < perPage) {
                     for(var i=0; i < perPage; i++) {
-                        console.log(perPage-i);
+                        // console.log(perPage-i);
                         if(i+1 == currentPage) {
                             page += "<button style='font-weight:bold;' onclick='showTodoList("+(i+1)+")'>"+(i+1)+"</button>";
                         } else {
@@ -186,7 +186,7 @@ table {
                     }
                 } else {
                     for(var i=-parseInt(perPage / 2); i < parseInt(perPage / 2)+1; i++) {
-                        console.log(i);
+                        // console.log(i);
                         if(currentPage == (currentPage + i)) {
                             page += "<button style='font-weight:bold;' onclick='showTodoList("+(currentPage+i)+")'>"+(currentPage+i)+"</button>";
                         } else {
@@ -200,7 +200,7 @@ table {
                 $("#page").html(page);
             },
             error : function (e) {
-                console.log(e);
+                // console.log(e);
             }
         });
     }
@@ -208,13 +208,13 @@ table {
     function insertTodoList() {
         var todoInsert = $("#tdIns").val();
         var chbox = checkBoxValue();
-        console.log(typeof(chbox));
+        // console.log(typeof(chbox));
         if(chbox.length == 0) {
             var data = {"title" : todoInsert};
         } else {
             var data = {"title" : todoInsert, "reference" : chbox};
         }
-        console.log(data);
+        // console.log(data);
         var status = $("#subBtn").val();
         // status 가 있을때는 수정
         if(status != 0) {
@@ -229,7 +229,7 @@ table {
                 location.reload();
             },
             error : function (e) {
-                console.log(e);
+                // console.log(e);
             }
         });
         } else {
@@ -244,7 +244,7 @@ table {
                 location.reload();
             },
             error : function (e) {
-                console.log(e);
+                // console.log(e);
             }
         });
         }
@@ -275,7 +275,7 @@ table {
                 // }
             })
         }
-        console.log(checkStr);
+        // console.log(checkStr);
         return checkStr;
     }
 
@@ -295,7 +295,7 @@ table {
                 $("#subBtn").val(todoList['id']);
             },
             error : function (e) {
-                console.log(e);
+                // console.log(e);
             }
         });
 
@@ -309,7 +309,7 @@ table {
             type : "DELETE",
             success : function (s) {
                 // var data = JSON.parse(s);
-                console.log(s);
+                // console.log(s);
                 // var data = s['data'];
                 var result = s['result'];
                 if(result == 'S000') {
@@ -325,7 +325,7 @@ table {
                 
             },
             error : function (e) {
-                console.log(e);
+                // console.log(e);
             }
         });
     }
@@ -350,14 +350,14 @@ table {
                 // var data = JSON.parse(s);
                 // var data = s['data'];
                 if(s['result'] == 'S000') {
-                    console.log(s);
+                    // console.log(s);
                     location.reload();
                 } else {
                     alert("참조한 TodoList가 미완료 상태입니다.");
                 }
             },
             error : function (e) {
-                console.log(e);
+                // console.log(e);
             }
         });
     }
@@ -374,7 +374,7 @@ table {
         
         if(searchCategory == '3') {
             var searchStr = searchTimeConvert(searchStr);
-            console.log(searchStr);
+            // console.log(searchStr);
             // return;
         } else if(searchCategory == '4') {
             var searchStr = searchTimeConvert(searchStr);
@@ -419,10 +419,10 @@ table {
                 var lastPage = s['data']['last_page'];
                 var currentPage = s['data']['current_page'];
                 var pageList = s['data']['links']; // page 처리를 위한 변수
-                console.log(perPage);
-                console.log(pageList);
-                console.log("currentPage : " + currentPage);
-                console.log("lastPage : " + lastPage);
+                // console.log(perPage);
+                // console.log(pageList);
+                // console.log("currentPage : " + currentPage);
+                // console.log("lastPage : " + lastPage);
                 for(var i=0; i < todoList.length; i++) {
                     // console.log(todoList[$i]); // todoList 가져온게 맞는지 확인하는 콘솔
                     // var beTime = new Date(todoList[$i]['updated_at']);
@@ -461,7 +461,7 @@ table {
                     }
                 } else if(currentPage < perPage) {
                     for(var i=0; i < perPage; i++) {
-                        console.log(perPage-i);
+                        // console.log(perPage-i);
                         if(i+1 == currentPage) {
                             page += "<button style='font-weight:bold;' onclick='serchTodoList("+(i+1)+")'>"+(i+1)+"</button>";
                         } else {
@@ -479,7 +479,7 @@ table {
                     }
                 } else {
                     for(var i=-parseInt(perPage / 2); i < parseInt(perPage / 2)+1; i++) {
-                        console.log(i);
+                        // console.log(i);
                         if(currentPage == (currentPage + i)) {
                             page += "<button style='font-weight:bold;' onclick='serchTodoList("+(currentPage+i)+")'>"+(currentPage+i)+"</button>";
                         } else {
@@ -492,7 +492,7 @@ table {
                 $("#page").html(page);
             },
             error : function (e) {
-                console.log(e);
+                // console.log(e);
             }
         });
 

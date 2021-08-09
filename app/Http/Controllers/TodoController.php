@@ -192,14 +192,16 @@ class TodoController extends Controller
             case '3':
                 // 수정일 검색
                 $tomorrow = Date('Y-m-d', strtotime($searchStr.' +1 day'));
-                $todoList = Todo::whereBetween('updated_at', [$searchStr, $tomorrow])->paginate(5);
+                $today = Date('Y-m-d H:i:s', strtotime($searchStr.' -1 day'));
+                $todoList = Todo::whereBetween('updated_at', [$today.' 09:00:00', $tomorrow.' 09:00:00'])->paginate(5);
                 $data['result'] = 'S000';
                 $data['data'] = $todoList;
                 break;
             case '4':
                 // 등록일 검색
                 $tomorrow = Date('Y-m-d', strtotime($searchStr.' +1 day'));
-                $todoList = Todo::whereBetween('created_at', [$searchStr, $tomorrow])->paginate(5);
+                $today = Date('Y-m-d H:i:s', strtotime($searchStr.' -1 day'));
+                $todoList = Todo::whereBetween('created_at', [$today.' 09:00:00', $tomorrow.' 09:00:00'])->paginate(5);
                 $data['result'] = 'S000';
                 $data['data'] = $todoList;
                 break;
